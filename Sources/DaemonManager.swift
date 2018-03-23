@@ -1,5 +1,5 @@
 import Foundation
-
+import UserNotifications
 
 
 /**
@@ -176,6 +176,67 @@ public extension DaemonManager {
                 daemon.didInvalidatePushToken()
         }
     }
+    
+    /**
+     Should be forwarded by a `UNUserNotificationCenterDelegate`.
+     
+     - parameter center:            Notification center.
+     - parameter response:          Notification response containing info about action taken and a notification itself.
+     - parameter completionHandler: Completion.
+     */
+    @available(iOS 10.0, *)
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Get info
+        let content = response.notification.request.content
+        let actionIdentifier = response.actionIdentifier
+        // Check for notification type (depends on the app if this is actually needed)
+        if response.notification.request.trigger is UNPushNotificationTrigger {
+            // --- Remote notificaiton
+            handleRemoteNotification(content.userInfo, completion: { _ in completionHandler() })
+        } else {
+            // --- Local notification
+            // Get category
+            let category = content.categoryIdentifier
+            if category.isEmpty {
+                logDebug("Application did receive local notification - without a category!")
+                completionHandler()
+                return
+            }
+            logDebug("Application did receive local notification, category=\(category), userInfo=\(String(describing: content.userInfo))")
+            // Dismiss - probably do nothing, depends on the app
+            if actionIdentifier == UNNotificationDismissActionIdentifier {
+                completionHandler()
+                return
+            }
+            // Default of other actions
+            else {
+                // Default action - user opened the app from the notification interface.
+                if actionIdentifier == UNNotificationDefaultActionIdentifier {
+                    for daemon in daemonsForType(LocalNotificationDaemonType.self) {
+                        if daemon.category == category {
+                            daemon.handleNotification(content.userInfo as? [String:AnyObject])
+                            return
+                        }
+                    }
+                    logDebug("Application local notification daemon not found, category=\(category), userInfo=\(String(describing: content.userInfo))")
+                }
+                // Other registered actions
+                else {
+                    for daemon in daemonsForType(LocalActionNotificationDaemonType.self) {
+                        if daemon.category == category {
+                            daemon.handleActionWithIdentifier(actionIdentifier,
+                                                              userInfo: content.userInfo as? [String:AnyObject],
+                                                              completionHandler: completionHandler)
+                            return
+                        }
+                    }
+                    logDebug("Application local notification daemon for action handler not found, category=\(category), userInfo=\(String(describing: content.userInfo))")
+                }
+                
+            }
+        }
+        
+    }
 }
 
 // MARK: - Notifications for Application Lifecycle
@@ -203,7 +264,7 @@ extension DaemonManager {
     
     @objc func onApplicationDidFinishLaunching(_ notification: Notification) {
         let launchOptions = notification.userInfo?[UIApplicationLaunchOptionsKey.userActivityDictionary] as? [AnyHashable: Any]
-        logDebug("Application did Finish launching with options, options=\(launchOptions)")
+        logDebug("Application did Finish launching with options, options=\(String(describing: launchOptions))")
         for daemon in daemonsForType(ApplicationDaemonType.self) {
             daemon.application(UIApplication.shared, didFinishLaunchingWithOptions: launchOptions)
         }
