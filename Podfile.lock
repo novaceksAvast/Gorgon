@@ -1,0 +1,22 @@
+PODS:
+  - Nimble (7.0.3)
+  - Quick (1.2.0)
+  - Swinject (2.0.0)
+  - SwinjectPropertyLoader (1.0.0):
+    - Swinject (~> 2.0.0)
+
+DEPENDENCIES:
+  - Nimble (= 7.0.3)
+  - Quick (= 1.2.0)
+  - Swinject (= 2.0.0)
+  - SwinjectPropertyLoader (= 1.0.0)
+
+SPEC CHECKSUMS:
+  Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
+  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
+  Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
+  SwinjectPropertyLoader: 5b26a1d3a6ba44fbe61425e06aba18ed64b76f4e
+
+PODFILE CHECKSUM: a1674e6f299470560bc20b54fc5cdbd0a83cb21c
+
+COCOAPODS: 1.2.1

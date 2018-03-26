@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A49D39D3EBA01AC3E08A468 /* Pods_GorgonBase_GorgonTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9DCB9038AE2799602A6E055 /* Pods_GorgonBase_GorgonTests.framework */; };
 		8F9E94A71ED7B29C004A7FB6 /* GorgonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E94A61ED7B29C004A7FB6 /* GorgonTests.swift */; };
 		8F9E94A91ED7B29C004A7FB6 /* Gorgon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 903EDF071CC19DAA00AF813C /* Gorgon.framework */; };
 		903EDF0B1CC19DAA00AF813C /* Gorgon.h in Headers */ = {isa = PBXBuildFile; fileRef = 903EDF0A1CC19DAA00AF813C /* Gorgon.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -78,6 +79,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F9E94A91ED7B29C004A7FB6 /* Gorgon.framework in Frameworks */,
+				3A49D39D3EBA01AC3E08A468 /* Pods_GorgonBase_GorgonTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,9 +226,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8F9E94AC1ED7B29C004A7FB6 /* Build configuration list for PBXNativeTarget "GorgonTests" */;
 			buildPhases = (
+				5A19E75225CC5456A374E735 /* [CP] Check Pods Manifest.lock */,
 				8F9E94A01ED7B29C004A7FB6 /* Sources */,
 				8F9E94A11ED7B29C004A7FB6 /* Frameworks */,
 				8F9E94A21ED7B29C004A7FB6 /* Resources */,
+				BB0FC5F0BAB49418BA5B733F /* [CP] Embed Pods Frameworks */,
+				1FFA77A2D834C704EFA1B565 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -331,6 +336,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GorgonBase-Gorgon/Pods-GorgonBase-Gorgon-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		1FFA77A2D834C704EFA1B565 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GorgonBase-GorgonTests/Pods-GorgonBase-GorgonTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4B0F5776F897A688D89813C2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,6 +364,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5A19E75225CC5456A374E735 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		BB0FC5F0BAB49418BA5B733F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GorgonBase-GorgonTests/Pods-GorgonBase-GorgonTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -388,6 +438,7 @@
 /* Begin XCBuildConfiguration section */
 		8F9E94AD1ED7B29C004A7FB6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2376B2F2915F2977385CCA6B /* Pods-GorgonBase-GorgonTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -404,6 +455,7 @@
 		};
 		8F9E94AE1ED7B29C004A7FB6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A571589CD500C2254F38FE5A /* Pods-GorgonBase-GorgonTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
